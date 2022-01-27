@@ -1,0 +1,16 @@
+import { Module } from '@nestjs/common';
+import { IncomeTypesController } from './income-types/income-types.controller';
+import { ExpenseTypesController } from './expense-types/expense-types.controller';
+import { ExpenseTypesService } from './expense-types/expense-types.service';
+import { IncomeTypesService } from './income-types/income-types.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { IncomeType } from './entities/income-type.entity';
+import { ExpenseType } from './entities/expense-type.entity';
+
+@Module({
+  imports: [TypeOrmModule.forFeature([IncomeType, ExpenseType])],
+  controllers: [IncomeTypesController, ExpenseTypesController],
+  providers: [ExpenseTypesService, IncomeTypesService],
+  exports: [IncomeTypesService, ExpenseTypesService]
+})
+export class CatalogueModule {}
