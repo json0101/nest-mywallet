@@ -30,8 +30,11 @@ import { TransactionsModule } from './transactions/transactions.module';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
+      ssl: {
+        rejectUnauthorized: false
+      }
      // synchronize: true,
-     
+
       // type: "postgres",
       // url: process.env.DATABASE_URL,
       // synchronize: false,
