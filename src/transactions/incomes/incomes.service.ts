@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
+import { addDays } from 'date-fns';
 import { IncomeTypesService } from 'src/catalogue/income-types/income-types.service';
 import { PaginationDateDto } from 'src/common/dtos/pagination-date.dto';
 import { IUserSession } from 'src/user/interfaces/user-session.interface';
@@ -8,7 +9,6 @@ import { Between, Repository } from 'typeorm';
 import { CreateIncomeDto } from '../dtos/create-income.dto';
 import { UpdateIncomeDto } from '../dtos/update-income.dto';
 import { Income } from '../entities/income.entity';
-import { addDays} from 'date-fns';
 
 @Injectable()
 export class IncomesService {
