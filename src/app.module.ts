@@ -30,6 +30,7 @@ import { TransactionsModule } from './transactions/transactions.module';
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
       autoLoadEntities: true,
+      ssl: process.env.IS_PRODUCTION==='true'? true: false
       // synchronize: true,
     }),
     CatalogueModule,
