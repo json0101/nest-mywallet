@@ -30,12 +30,13 @@ import { TransactionsModule } from './transactions/transactions.module';
       // password: process.env.DATABASE_PASSWORD,
       // database: process.env.DATABASE_NAME,
       // autoLoadEntities: true,
-      // ssl: process.env.IS_PRODUCTION==='true'? true: false
+     
       type: "postgres",
       url: process.env.DATABASE_URL,
       synchronize: false,
       logging: true,
-      entities: ["src/entity/*.*"]
+      entities: ["src/entity/*.*"],
+      ssl: process.env.IS_PRODUCTION==='true'? true: false
       // synchronize: true,
     }),
     CatalogueModule,
