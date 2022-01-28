@@ -11,6 +11,13 @@ export class IncomeTypesController {
 
     }
 
+    @Get('actives')
+    async findAllActives(@Request() req) {
+        const user:IUserSession = req.user;
+
+        return this.incomeTypeService.findAllActives(user);
+    }
+
     @Get()
     async findAll(@Request() req) {
         const user:IUserSession = req.user;

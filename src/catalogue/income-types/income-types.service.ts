@@ -15,6 +15,15 @@ export class IncomeTypesService {
     ) {
     }
 
+    findAllActives(user: IUserSession) {
+        return this.incomeTypeRepository.find({
+            where: {
+                user_creates: user.id,
+                active: true
+            }
+        });
+    }
+
     findAll(user: IUserSession) {
         return this.incomeTypeRepository.find({
             where: {

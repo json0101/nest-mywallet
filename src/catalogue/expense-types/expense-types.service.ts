@@ -14,6 +14,15 @@ export class ExpenseTypesService {
         private readonly expenseTypeRepository: Repository<ExpenseType>) {
     }
 
+    findAllActives(user: IUserSession) {
+        return this.expenseTypeRepository.find({
+            where: {
+                user_creates: user.id,
+                active: true
+            }
+        });
+    }
+
     findAll(user: IUserSession) {
         return this.expenseTypeRepository.find({
             where: {
