@@ -27,3 +27,6 @@ $ npm run start:prod
 4. AuthModule
 5. CatalogueModule
 6. TransactionModule
+
+## Deployment - Swagger
+https://nest-mywallet.herokuapp.com/api/
