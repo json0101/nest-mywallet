@@ -30,3 +30,16 @@ $ npm run start:prod
 
 ## Deployment - Swagger
 https://nest-mywallet.herokuapp.com/api/
+
+## Configuration Postgrest connection
+Add this variables to your env to connect with postgres
+DATABASE_USER=postgres
+DATABASE_PASSWORD=root
+DATABASE_NAME=mywallet
+DATABASE_PORT=5432
+DATABASE_HOST=localhost
+API_KEY=123
+JWT_SECRET=mywallet123
+EXPIRESIN=86400s
+IS_PRODUCTION=false
+DATABASE_URL=test
