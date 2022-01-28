@@ -32,17 +32,8 @@ import { TransactionsModule } from './transactions/transactions.module';
       autoLoadEntities: true,
       ssl: process.env.IS_PRODUCTION==='true'? {
         rejectUnauthorized: false
-      }: null
-     // synchronize: true,
-
-      // type: "postgres",
-      // url: process.env.DATABASE_URL,
-      // synchronize: false,
-      // logging: true,
-      // entities: ["src/entity/*.*"],
-      // ssl: process.env.IS_PRODUCTION==='true'? true: false,
-      // autoLoadEntities: true,
-      
+      }: null,
+      synchronize: process.env.IS_PRODUCTION==='true'?false: true,
     }),
     CatalogueModule,
     UserModule,

@@ -1,5 +1,5 @@
 import { Expense } from "src/transactions/entities/expense.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity("expense_types")
 export class ExpenseType {
@@ -9,7 +9,6 @@ export class ExpenseType {
 
     @Column()
     description: string;
-    
 
     @Column()
     user_creates: number;

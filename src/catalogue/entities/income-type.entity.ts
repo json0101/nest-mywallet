@@ -1,5 +1,5 @@
 import { Income } from "src/transactions/entities/income.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
 
 @Entity("income_types")
 export class IncomeType {
@@ -10,7 +10,6 @@ export class IncomeType {
     @Column()
     description: string;
 
-    
     @Column()
     user_creates: number;
     
