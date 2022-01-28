@@ -12,6 +12,12 @@ export class ExpensesController {
 
     }
 
+    @Get('dashboard')
+    async dashboard(@Request() req, @Query() pagination: PaginationDateDto) {
+        const user:IUserSession = req.user;
+        return this.expenseService.dashBoardExpenses(user, pagination);
+    }
+
     @Get()
     async findAll(@Request() req, @Query() pagination: PaginationDateDto) {
         const user:IUserSession = req.user;

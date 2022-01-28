@@ -20,6 +20,20 @@ export class IncomesService {
         ) {
     }
 
+    dashboarIncomes(user: IUserSession, paginationDate: PaginationDateDto) {
+        const u = addDays(new Date(paginationDate.until), 1);
+
+        return this.incomeRepository.find(
+            {
+                relations: ["income_type"],
+                where: {
+                    user_creates: user.id,
+                    date: Between(paginationDate.from, u),
+                    active: true
+                }
+            });
+    }
+
     findAll(user: IUserSession, paginationDate: PaginationDateDto) {
         const u = addDays(new Date(paginationDate.until), 1);
 

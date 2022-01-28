@@ -12,6 +12,14 @@ export class IncomesController {
         private readonly incomeService: IncomesService,) {
     }
 
+    @Get('dashboard')
+    async dashboar(@Request() req, @Query() pagination: PaginationDateDto) {
+
+        const user:IUserSession = req.user;
+
+        return this.incomeService.dashboarIncomes(user, pagination);
+    }
+
     @Get()
     async findAll(@Request() req, @Query() pagination: PaginationDateDto) {
 

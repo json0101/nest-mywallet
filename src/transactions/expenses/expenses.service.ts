@@ -20,6 +20,20 @@ export class ExpensesService {
 
     }
 
+    dashBoardExpenses(user: IUserSession, paginationDate: PaginationDateDto) {
+        const u = addDays(new Date(paginationDate.until), 1);
+        return this.expenseRepository.find(
+            { 
+                relations: ["expense_type"],
+                where: {
+                    user_creates: user.id,
+                    date: Between(paginationDate.from, u),
+                    active: true
+                    //date: LessThanOrEqual(paginationDate.)
+                }
+            });
+    }
+
     findAll(user: IUserSession, paginationDate: PaginationDateDto) {
         const u = addDays(new Date(paginationDate.until), 1);
         return this.expenseRepository.find(
