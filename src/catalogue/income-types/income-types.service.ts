@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Income } from 'src/transactions/entities/income.entity';
 import { IUserSession } from 'src/user/interfaces/user-session.interface';
 import { Connection, Repository } from 'typeorm';
 import { CreateIncomeTypeDto } from '../dtos/create-income-type.dto';
@@ -11,7 +12,9 @@ export class IncomeTypesService {
 
     constructor(
         @InjectRepository(IncomeType)
-        private readonly incomeTypeRepository: Repository<IncomeType>
+        private readonly incomeTypeRepository: Repository<IncomeType>,
+        @InjectRepository(Income)
+        private readonly incomeRepository: Repository<Income>,
     ) {
     }
 
@@ -79,6 +82,18 @@ export class IncomeTypesService {
 
     async remove(id: number, user: IUserSession){
         const incomeType = await this.findOne(id, user);
+
+        const incomeAlreadyHasData = await this.incomeRepository.findOne({
+            where: {
+                income_type: incomeType 
+            }
+        });
+
+        if(incomeAlreadyHasData){
+            throw new NotFoundException(`Income Type ${incomeType.description} can't be delete`);
+        }
+
+
         return this.incomeTypeRepository.remove(incomeType);
     }
 }

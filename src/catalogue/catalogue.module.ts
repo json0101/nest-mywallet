@@ -6,9 +6,11 @@ import { IncomeTypesService } from './income-types/income-types.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { IncomeType } from './entities/income-type.entity';
 import { ExpenseType } from './entities/expense-type.entity';
+import { Expense } from 'src/transactions/entities/expense.entity';
+import { Income } from 'src/transactions/entities/income.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([IncomeType, ExpenseType])],
+  imports: [TypeOrmModule.forFeature([IncomeType, ExpenseType, Expense, Income])],
   controllers: [IncomeTypesController, ExpenseTypesController],
   providers: [ExpenseTypesService, IncomeTypesService],
   exports: [IncomeTypesService, ExpenseTypesService]

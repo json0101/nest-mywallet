@@ -1,5 +1,7 @@
 import { Get, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Expense } from 'src/transactions/entities/expense.entity';
+import { ExpensesService } from 'src/transactions/expenses/expenses.service';
 import { IUserSession } from 'src/user/interfaces/user-session.interface';
 import { Repository } from 'typeorm';
 import { CreateExpenseTypeDto } from '../dtos/create-expense-type.dto';
@@ -11,7 +13,9 @@ export class ExpenseTypesService {
 
     constructor(
         @InjectRepository(ExpenseType)
-        private readonly expenseTypeRepository: Repository<ExpenseType>) {
+        private readonly expenseTypeRepository: Repository<ExpenseType>,
+        @InjectRepository(Expense)
+        private readonly expenseRepository: Repository<Expense>,) {
     }
 
     findAllActives(user: IUserSession) {
@@ -80,6 +84,18 @@ export class ExpenseTypesService {
 
     async remove(id: number, user: IUserSession){
         const expenseType = await this.findOne(id, user);
+
+        const expenseAlreadyHasData = await this.expenseRepository.findOne({
+            where: {
+                expense_type: expenseType 
+            }
+        });
+
+
+        if(expenseAlreadyHasData){
+            throw new NotFoundException(`Expense Type ${expenseType.description} can't be delete`);
+        }
+
         return this.expenseTypeRepository.remove(expenseType);
     }
 }
