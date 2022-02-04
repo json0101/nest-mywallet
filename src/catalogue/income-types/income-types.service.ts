@@ -80,7 +80,7 @@ export class IncomeTypesService {
         return this.incomeTypeRepository.save(incomeType);
     }
 
-    async remove(id: number, user: IUserSession){
+    async remove(id: number, user: IUserSession) {
         const incomeType = await this.findOne(id, user);
 
         const incomeAlreadyHasData = await this.incomeRepository.findOne({

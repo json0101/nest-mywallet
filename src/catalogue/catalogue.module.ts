@@ -8,11 +8,14 @@ import { IncomeType } from './entities/income-type.entity';
 import { ExpenseType } from './entities/expense-type.entity';
 import { Expense } from 'src/transactions/entities/expense.entity';
 import { Income } from 'src/transactions/entities/income.entity';
+import { Category } from './entities/category.entity';
+import { CategoriesController } from './categories/categories.controller';
+import { CategoriesService } from './categories/categories.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([IncomeType, ExpenseType, Expense, Income])],
-  controllers: [IncomeTypesController, ExpenseTypesController],
-  providers: [ExpenseTypesService, IncomeTypesService],
-  exports: [IncomeTypesService, ExpenseTypesService]
+  imports: [TypeOrmModule.forFeature([IncomeType, ExpenseType, Expense, Income, Category])],
+  controllers: [IncomeTypesController, ExpenseTypesController, CategoriesController],
+  providers: [ExpenseTypesService, IncomeTypesService, CategoriesService],
+  exports: [IncomeTypesService, ExpenseTypesService, CategoriesService]
 })
 export class CatalogueModule {}
